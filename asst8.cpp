@@ -567,10 +567,10 @@ static void drawStuff(bool picking) {
           (g_mouseLClickButton && !g_mouseRClickButton && g_spaceDown)))
         updateArcballScale();
 
-    if (g_shellNeedsUpdate) {
-        updateShellGeometry();
-        g_shellNeedsUpdate = false;
-    }
+    //if (g_shellNeedsUpdate) {
+    //    updateShellGeometry();
+    //    g_shellNeedsUpdate = false;
+    //}
 
     Uniforms uniforms;
 
@@ -1340,7 +1340,7 @@ static void glfwLoop() {
         if( thisTime - g_lastFrameClock >= 1. / g_framesPerSecond) {
 
             animationUpdate();
-            hairsSimulationUpdate();
+            //hairsSimulationUpdate();
 
             display();
             g_lastFrameClock = thisTime;
