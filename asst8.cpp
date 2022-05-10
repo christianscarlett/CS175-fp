@@ -316,12 +316,13 @@ public:
     * Add object i to the scene graph
     */
     void initNode(int i) {
-        nodes[i].reset(new SgRbtNode());
-        nodes[i]->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(g_cube, g_redDiffuseMat)
+        shared_ptr<SgRbtNode> node = nodes.at(i);
+        node.reset(new SgRbtNode());
+        node->addChild(shared_ptr<MyShapeNode>(
+            new MyShapeNode(shapes.at(i), i % 2 == 0 ? g_redDiffuseMat : g_blueDiffuseMat)
             ));
 
-        g_world->addChild(nodes[i]);
+        g_world->addChild(node);
     }
 
     /*
