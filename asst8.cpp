@@ -296,20 +296,20 @@ class Builder {
 public:
     vector<shared_ptr<Geometry>> shapes;
     vector<shared_ptr<SgRbtNode>> nodes;
+    enum ShapeGeo {
+        CUBE,
+        SPHERE,
+    };
 
     /*
     * Initialize the geometry for the object with index i
     */
-    void initGeo(int i) {
-        // Just use cube geo for now
-        int ibLen, vbLen;
-        getCubeVbIbLen(vbLen, ibLen);
-        // Temporary storage for cube Geometry
-        vector<VertexPNTBX> vtx(vbLen);
-        vector<unsigned short> idx(ibLen);
-        makeCube(1, vtx.begin(), idx.begin());
-
-        shapes.at(i).reset(new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
+    void initGeo(int i, ShapeGeo shape) {
+        if (shape == SPHERE) {
+            shapes.at(i) = g_sphere;
+        } else {
+            shapes.at(i) = g_cube;
+        }
     }
 
     /*
@@ -328,15 +328,19 @@ public:
     /*
     * Spawn a new shape at (0,0,0)
     */
-    void addShape() {
+    void addShape(ShapeGeo shape=CUBE) {
         shared_ptr<Geometry> geo;
         shapes.push_back(geo);
-        initGeo(shapes.size()-1);
+        initGeo(shapes.size()-1, shape);
 
         shared_ptr<SgRbtNode> node;
         nodes.push_back(node);
         initNode(nodes.size()-1);
     }
+
+    void addCube() { addShape(CUBE); }
+    
+    void addSphere() { addShape(SPHERE); }
 
 };
 
@@ -1382,8 +1386,8 @@ static void initScene() {
 }
 
 static void initBuilder() {
-    g_builder.addShape();
-    g_builder.addShape();
+    g_builder.addCube();
+    g_builder.addSphere();
 }
 
 static void initAnimation() {
