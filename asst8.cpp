@@ -295,8 +295,47 @@ static int g_curKeyFrameNum;
 static vector<shared_ptr<Geometry>> g_shapes;
 static vector<shared_ptr<SgRbtNode>> g_nodes;
 
+class Builder {
+public:
+//private:
+    vector<shared_ptr<Geometry>> shapes;
+    vector<shared_ptr<SgRbtNode>> nodes;
 
+//public:
+    void initGeo(int i) {
+        // Just use cube geo for now
+        int ibLen, vbLen;
+        getCubeVbIbLen(vbLen, ibLen);
+        // Temporary storage for cube Geometry
+        vector<VertexPNTBX> vtx(vbLen);
+        vector<unsigned short> idx(ibLen);
+        makeCube(1, vtx.begin(), idx.begin());
 
+        shapes.at(i).reset(new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
+    }
+
+    void initNode(int i) {
+        nodes[i].reset(new SgRbtNode());
+        nodes[i]->addChild(shared_ptr<MyShapeNode>(
+            new MyShapeNode(g_cube, g_redDiffuseMat)
+            ));
+
+        g_world->addChild(nodes[i]);
+    }
+
+    void addShape() {
+        shared_ptr<Geometry> geo;
+        shapes.push_back(geo);
+        initGeo(shapes.size()-1);
+
+        shared_ptr<SgRbtNode> node;
+        nodes.push_back(node);
+        initNode(nodes.size()-1);
+    }
+
+};
+
+static Builder g_builder;
 
 
 ///////////////// END OF G L O B A L S /////////////////////////////////////////
@@ -1358,11 +1397,15 @@ static void initScene() {
     g_world->addChild(g_robot1Node);
     g_world->addChild(g_robot2Node);
     g_world->addChild(g_bunnyNode);
-    for (int i = 0; i < g_nodes.size(); i++) {
-        g_world->addChild(g_nodes[i]);
-    }
+    //for (int i = 0; i < g_nodes.size(); i++) {
+    //    g_world->addChild(g_nodes[i]);
+    //}
 
     g_currentCameraNode = g_skyNode;
+}
+
+static void initBuilder() {
+    g_builder.addShape();
 }
 
 static void initAnimation() {
@@ -1405,6 +1448,7 @@ int main(int argc, char *argv[]) {
         initScene();
         initAnimation();
         initSimulation();
+        initBuilder();
 
         glfwLoop();
         return 0;
