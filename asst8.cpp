@@ -292,16 +292,14 @@ static int g_curKeyFrameNum;
 
 
 //-------- Final Project
-static vector<shared_ptr<Geometry>> g_shapes;
-static vector<shared_ptr<SgRbtNode>> g_nodes;
-
 class Builder {
 public:
-//private:
     vector<shared_ptr<Geometry>> shapes;
     vector<shared_ptr<SgRbtNode>> nodes;
 
-//public:
+    /*
+    * Initialize the geometry for the object with index i
+    */
     void initGeo(int i) {
         // Just use cube geo for now
         int ibLen, vbLen;
@@ -314,6 +312,9 @@ public:
         shapes.at(i).reset(new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
     }
 
+    /*
+    * Add object i to the scene graph
+    */
     void initNode(int i) {
         nodes[i].reset(new SgRbtNode());
         nodes[i]->addChild(shared_ptr<MyShapeNode>(
@@ -323,6 +324,9 @@ public:
         g_world->addChild(nodes[i]);
     }
 
+    /*
+    * Spawn a new shape at (0,0,0)
+    */
     void addShape() {
         shared_ptr<Geometry> geo;
         shapes.push_back(geo);
@@ -493,23 +497,6 @@ static void initGround() {
     makePlane(g_groundSize * 2, vtx.begin(), idx.begin());
     g_ground.reset(
         new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
-}
-
-static void initShapes() {
-    int ibLen, vbLen;
-    getCubeVbIbLen(vbLen, ibLen);
-
-    // Temporary storage for cube Geometry
-    vector<VertexPNTBX> vtx(vbLen);
-    vector<unsigned short> idx(ibLen);
-
-    makeCube(1, vtx.begin(), idx.begin());
-    shared_ptr<Geometry> boi;
-    boi.reset(new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
-    g_shapes.push_back(boi);
-
-    shared_ptr<SgRbtNode> asdf;
-    g_nodes.push_back(asdf);
 }
 
 static void initCubes() {
@@ -1258,7 +1245,6 @@ static void initMaterials() {
 
 static void initGeometry() {
     initGround();
-    initShapes();
     initCubes();
     initSphere();
     initRobots();
@@ -1382,13 +1368,6 @@ static void initScene() {
     // from this point, calling g_bunnyShellGeometries[i]->upload(...) will
     // change the geometry of the ith layer of shell that gets drawn
 
-    for (int i = 0; i < g_nodes.size(); i++) {
-        g_nodes[i].reset(new SgRbtNode());
-        g_nodes[i]->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(g_cube, g_redDiffuseMat)
-            ));
-    }
-
 
     g_world->addChild(g_skyNode);
     g_world->addChild(g_groundNode);
@@ -1397,14 +1376,12 @@ static void initScene() {
     g_world->addChild(g_robot1Node);
     g_world->addChild(g_robot2Node);
     g_world->addChild(g_bunnyNode);
-    //for (int i = 0; i < g_nodes.size(); i++) {
-    //    g_world->addChild(g_nodes[i]);
-    //}
 
     g_currentCameraNode = g_skyNode;
 }
 
 static void initBuilder() {
+    g_builder.addShape();
     g_builder.addShape();
 }
 
