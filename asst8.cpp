@@ -1101,6 +1101,12 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             g_hairyness /= 1.05;
             cerr << "hairyness = " << g_hairyness << std::endl;
             break;
+        case GLFW_KEY_E:
+            g_builder.addCube();
+            break;
+        case GLFW_KEY_R:
+            g_builder.addSphere();
+            break;
         }
     } else {
         switch(key) {
