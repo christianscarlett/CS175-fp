@@ -1359,7 +1359,7 @@ static void initScene() {
     
     // create a single transform node for both the bunny and the bunny
     // shells
-    g_bunnyNode.reset(new SgRbtNode(RigTForm(Cvec3(0,1,0))));
+    g_bunnyNode.reset(new SgRbtNode(RigTForm(Cvec3(5,1,-10))));
 
     // add bunny as a shape nodes
     g_bunnyNode->addChild(
@@ -1378,8 +1378,8 @@ static void initScene() {
     g_world->addChild(g_groundNode);
     g_world->addChild(g_light1Node);
     g_world->addChild(g_light2Node);
-    g_world->addChild(g_robot1Node);
-    g_world->addChild(g_robot2Node);
+    //g_world->addChild(g_robot1Node);
+    //g_world->addChild(g_robot2Node);
     g_world->addChild(g_bunnyNode);
 
     g_currentCameraNode = g_skyNode;
