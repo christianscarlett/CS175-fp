@@ -318,9 +318,8 @@ public:
     */
     void initNode(int i) {
         shared_ptr<SgRbtNode> node = nodes.at(i);
-        node.reset(new SgRbtNode());
         node->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(shapes.at(i), i % 2 == 0 ? g_redDiffuseMat : g_blueDiffuseMat)
+            new MyShapeNode(shapes.at(i), g_redDiffuseMat)
             ));
 
         g_world->addChild(node);
@@ -329,22 +328,47 @@ public:
     /*
     * Spawn a new shape at (0,0,0)
     */
-    void addShape(ShapeGeo shape=CUBE) {
+    shared_ptr<SgRbtNode> addShape(ShapeGeo shape=CUBE) {
         shared_ptr<SimpleIndexedGeometryPN> geo;
         shapes.push_back(geo);
         initGeo(shapes.size()-1, shape);
 
         shared_ptr<SgRbtNode> node;
+        node.reset(new SgRbtNode());
         nodes.push_back(node);
         initNode(nodes.size()-1);
+        return node;
     }
 
-    void addCube() { addShape(CUBE); }
+    shared_ptr<SgRbtNode> addCube() { return addShape(CUBE); }
     
-    void addSphere() { addShape(SPHERE); }
+    shared_ptr<SgRbtNode> addSphere() { return addShape(SPHERE); }
 
-    void combineObjects() {
+    void group() {
+        // get selected nodes
+        vector<shared_ptr<SgRbtNode>> selected = nodes;
 
+        // create new parent
+        shared_ptr<SgRbtNode> parent;
+        parent.reset(new SgRbtNode());
+        parent->addChild(shared_ptr<MyShapeNode>(
+            new MyShapeNode(g_cube, g_blueDiffuseMat)
+            ));
+
+        // iterate over nodes:
+        for (int i = 0; i < selected.size(); i++) {
+            shared_ptr<SgRbtNode> selectedChild = selected.at(i);
+            cout << selectedChild << endl;
+
+            // remove selected from SG
+            g_world->removeChild(selectedChild);
+            // recontextualize position, rotation
+            
+            // add selected to new parent
+            parent->addChild(selectedChild);
+        }
+        // add new parent to SG
+        g_world->addChild(parent);
     }
 
 };
@@ -1128,6 +1152,9 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             break;
         case GLFW_KEY_R:
             g_builder.addSphere();
+            break;
+        case GLFW_KEY_G:
+            g_builder.group();
             break;
         }
     } else {
