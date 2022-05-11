@@ -295,7 +295,7 @@ static int g_curKeyFrameNum;
 
 
 //-------- Final Project
-static bool g_parentPickingMode = false;
+static bool g_parentPickingMode = true;
 
 class Builder {
 public:
@@ -321,8 +321,17 @@ public:
     */
     void initNode(int i, ShapeGeo shape) {
         shared_ptr<SgRbtNode> node = nodes.at(i);
+
+        shared_ptr<Material> material;
+        Material diffuse("./shaders/basic-gl3.vshader",
+            "./shaders/diffuse-gl3.fshader");
+        material.reset(new Material(diffuse));
+        material->getUniforms().put("uColor", Cvec3f(
+            (float)rand() / RAND_MAX, (float)rand() / RAND_MAX, (float)rand() / RAND_MAX)
+        );
+
         node->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(getGeo(shape), g_redDiffuseMat)
+            new MyShapeNode(getGeo(shape), material)
             ));
 
         g_world->addChild(node);
@@ -358,9 +367,6 @@ public:
         // create new parent
         shared_ptr<SgRbtNode> parent;
         parent.reset(new SgRbtNode(parentRbt));
-        parent->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(g_cube, g_blueDiffuseMat)
-        ));
 
         // iterate over nodes:
         for (int i = 0; i < selected.size(); i++) {
