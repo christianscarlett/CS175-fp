@@ -349,7 +349,6 @@ public:
             RigTForm selectedRbt = selected.at(i)->getRbt();
             parentPos += selectedRbt.getTranslation() / ((double)selected.size());
         }
-
         RigTForm parentRbt(parentPos);
 
         // create new parent
@@ -361,13 +360,15 @@ public:
 
         // iterate over nodes:
         for (int i = 0; i < selected.size(); i++) {
-            shared_ptr<SgRbtNode> selectedChild = selected.at(i);
+            shared_ptr<SgRbtNode> child = selected.at(i);
             // remove selected from SG
-            g_world->removeChild(selectedChild);
+            g_world->removeChild(child);
             // recontextualize position, rotation
-            
+            RigTForm childRbt = child->getRbt();
+            RigTForm newChildRbt = inv(parentRbt) * childRbt;
+            child->setRbt(newChildRbt);
             // add selected to new parent
-            parent->addChild(selectedChild);
+            parent->addChild(child);
         }
         // add new parent to SG
         g_world->addChild(parent);
