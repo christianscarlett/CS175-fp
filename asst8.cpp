@@ -296,10 +296,13 @@ static int g_curKeyFrameNum;
 
 //-------- Final Project
 static bool g_parentPickingMode = true;
+static bool g_selecting = false;
 
 class Builder {
 public:
     vector<shared_ptr<SgRbtNode>> nodes;
+    vector<shared_ptr<SgRbtNode>> selected;
+
     enum ShapeGeo {
         CUBE,
         SPHERE,
@@ -332,7 +335,7 @@ public:
 
         node->addChild(shared_ptr<MyShapeNode>(
             new MyShapeNode(getGeo(shape), material)
-            ));
+        ));
 
         g_world->addChild(node);
     }
@@ -352,9 +355,15 @@ public:
     
     shared_ptr<SgRbtNode> addSphere() { return addShape(SPHERE); }
 
+    void addToSelected(shared_ptr<SgRbtNode> node) {
+        // Selected nodes must be within the builder context
+        assert(find(nodes.begin(), nodes.end(), node) != nodes.end());
+        selected.push_back(node);
+    }
+
     void group() {
         // get selected nodes
-        vector<shared_ptr<SgRbtNode>> selected = nodes;
+        //vector<shared_ptr<SgRbtNode>> selected = nodes;
 
         // Calc parent position (average of selected)
         Cvec3 parentPos;
@@ -389,6 +398,10 @@ public:
         }
         // add parent to nodes
         nodes.push_back(parent);
+        // set parent as picked node
+        g_currentPickedRbtNode = parent;
+        // clear selected
+        selected.clear();
     }
 
 };
@@ -709,26 +722,27 @@ static void drawStuff(bool picking) {
     Cvec3 light2 = getPathAccumRbt(g_world, g_light2Node).getTranslation();
     uniforms.put("uLight2", Cvec3(invEyeRbt * Cvec4(light2, 1)));
 
-    if (!picking) {
-        Drawer drawer(invEyeRbt, uniforms);
-        g_world->accept(drawer);
-
-        if (g_displayArcball && shouldUseArcball())
-            drawArcBall(uniforms);
-    } else {
+    if (picking) {
+        // find picked node
         Picker picker(invEyeRbt, uniforms);
         g_overridingMaterial = g_pickingMat;
         g_world->accept(picker);
         g_overridingMaterial.reset();
         glFlush();
-
         shared_ptr<SgRbtNode> pickedRbtNode = picker.getRbtNodeAtXY(g_mouseClickX * g_wScale, g_mouseClickY * g_hScale);
 
-        if (g_parentPickingMode) {
+        if (g_parentPickingMode || g_selecting) {
+            // find parent of picked node
             ParentPicker parentPicker(pickedRbtNode);
             g_world->accept(parentPicker);
             shared_ptr<SgRbtNode> selectedParent = parentPicker.getParent();
-            g_currentPickedRbtNode = selectedParent;
+            if (g_selecting) {
+                // add parent to selected in builder
+                g_builder.addToSelected(selectedParent);
+            } else {
+                // set parent as picked
+                g_currentPickedRbtNode = selectedParent;
+            }
         }
         else {
             g_currentPickedRbtNode = pickedRbtNode;
@@ -739,6 +753,12 @@ static void drawStuff(bool picking) {
 
         cout << (g_currentPickedRbtNode ? "Part picked" : "No part picked")
              << endl;
+    } else {
+        Drawer drawer(invEyeRbt, uniforms);
+        g_world->accept(drawer);
+
+        if (g_displayArcball && shouldUseArcball())
+            drawArcBall(uniforms);
     }
 }
 
@@ -955,10 +975,12 @@ static void mouse(GLFWwindow *window, int button, int state, int mods) {
 
     g_mouseClickDown = g_mouseLClickButton || g_mouseRClickButton || g_mouseMClickButton;
 
-    if (g_pickingMode && button == GLFW_MOUSE_BUTTON_LEFT && state == GLFW_PRESS) {
+    if ((g_pickingMode || g_selecting) && button == GLFW_MOUSE_BUTTON_LEFT && state == GLFW_PRESS) {
         pick();
-        g_pickingMode = false;
-        cerr << "Picking mode is off" << endl;
+        if (g_pickingMode) {
+            g_pickingMode = false;
+            cerr << "Picking mode is off" << endl;
+        }
     }
 }
 
@@ -1188,7 +1210,19 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             g_builder.addSphere();
             break;
         case GLFW_KEY_G:
-            g_builder.group();
+            if (g_selecting) {
+                cout << "Grouping" << endl;
+                g_builder.group();
+                g_selecting = false;
+                cout << "Selecting: off" << endl;
+            }
+            break;
+        case GLFW_KEY_J:
+            if (!g_selecting && !g_pickingMode) {
+                g_currentPickedRbtNode = shared_ptr<SgRbtNode>(); // remove arcball
+                cout << "Selecting: on" << endl;
+                g_selecting = true;
+            }
             break;
         }
     } else {
