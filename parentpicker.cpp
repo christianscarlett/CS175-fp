@@ -9,11 +9,15 @@ using namespace std;
 
 ParentPicker::ParentPicker(shared_ptr<SgRbtNode> child) {
     child_ = child;
-    child_.reset(child.get());
 }
 
 bool ParentPicker::visit(SgTransformNode& node) {
     nodeStack_.push_back(node.shared_from_this());
+    if (node == *child_) {
+        shared_ptr<SgRbtNode> asRbtNode =
+            dynamic_pointer_cast<SgRbtNode>(nodeStack_.at(1));
+        parent_ = asRbtNode;
+    }
     return true;
 }
 

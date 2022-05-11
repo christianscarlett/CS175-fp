@@ -34,8 +34,8 @@ bool Picker::visit(SgShapeNode &node) {
     const Cvec3 idColor = idToColor(idCounter_);
 
     // DEBUG OUTPUT
-    cerr << idCounter_ << " => " << idColor[0] << ' ' << idColor[1] << ' '
-         << idColor[2] << endl;
+    //cerr << idCounter_ << " => " << idColor[0] << ' ' << idColor[1] << ' '
+    //     << idColor[2] << endl;
 
     drawer_.getUniforms().put("uIdColor", idColor);
     return drawer_.visit(node);

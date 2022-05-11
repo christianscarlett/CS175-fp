@@ -38,6 +38,8 @@
 
 #include "mesh.h"
 
+#include "parentpicker.h"
+
 using namespace std;
 
 // G L O B A L S ///////////////////////////////////////////////////
@@ -293,6 +295,8 @@ static int g_curKeyFrameNum;
 
 
 //-------- Final Project
+static bool g_parentPickingMode = false;
+
 class Builder {
 public:
     vector<shared_ptr<SgRbtNode>> nodes;
@@ -711,9 +715,19 @@ static void drawStuff(bool picking) {
         g_world->accept(picker);
         g_overridingMaterial.reset();
         glFlush();
-        g_currentPickedRbtNode =
-            picker.getRbtNodeAtXY(g_mouseClickX * g_wScale,
-                                  g_mouseClickY * g_hScale);
+
+        shared_ptr<SgRbtNode> pickedRbtNode = picker.getRbtNodeAtXY(g_mouseClickX * g_wScale, g_mouseClickY * g_hScale);
+
+        if (g_parentPickingMode) {
+            ParentPicker parentPicker(pickedRbtNode);
+            g_world->accept(parentPicker);
+            shared_ptr<SgRbtNode> selectedParent = parentPicker.getParent();
+            g_currentPickedRbtNode = selectedParent;
+        }
+        else {
+            g_currentPickedRbtNode = pickedRbtNode;
+        }
+
         if (g_currentPickedRbtNode == g_groundNode)
             g_currentPickedRbtNode = shared_ptr<SgRbtNode>(); // set to NULL
 
@@ -988,6 +1002,10 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
         case GLFW_KEY_P:
             g_pickingMode = !g_pickingMode;
             cerr << "Picking mode is " << (g_pickingMode ? "on" : "off") << endl;
+            break;
+        case GLFW_KEY_O:
+            g_parentPickingMode = !g_parentPickingMode;
+            cerr << "Parent Picking toggled " << (g_parentPickingMode ? "on" : "off") << endl;
             break;
         case GLFW_KEY_M:
             g_activeCameraFrame = SkyMode((g_activeCameraFrame + 1) % 2);
