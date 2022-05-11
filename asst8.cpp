@@ -295,7 +295,6 @@ static int g_curKeyFrameNum;
 //-------- Final Project
 class Builder {
 public:
-    vector<shared_ptr<SimpleIndexedGeometryPN>> shapes;
     vector<shared_ptr<SgRbtNode>> nodes;
     enum ShapeGeo {
         CUBE,
@@ -303,23 +302,23 @@ public:
     };
 
     /*
-    * Initialize the geometry for the object with index i
+    * Get geometry for a shape
     */
-    void initGeo(int i, ShapeGeo shape) {
+    shared_ptr<SimpleIndexedGeometryPN> getGeo(ShapeGeo shape) {
         if (shape == SPHERE) {
-            shapes.at(i) = g_spherePN;
+            return g_spherePN;
         } else {
-            shapes.at(i) = g_cubePN;
+            return g_cubePN;
         }
     }
 
     /*
     * Add object i to the scene graph
     */
-    void initNode(int i) {
+    void initNode(int i, ShapeGeo shape) {
         shared_ptr<SgRbtNode> node = nodes.at(i);
         node->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(shapes.at(i), g_redDiffuseMat)
+            new MyShapeNode(getGeo(shape), g_redDiffuseMat)
             ));
 
         g_world->addChild(node);
@@ -329,14 +328,10 @@ public:
     * Spawn a new shape at (0,0,0)
     */
     shared_ptr<SgRbtNode> addShape(ShapeGeo shape=CUBE) {
-        shared_ptr<SimpleIndexedGeometryPN> geo;
-        shapes.push_back(geo);
-        initGeo(shapes.size()-1, shape);
-
         shared_ptr<SgRbtNode> node;
         node.reset(new SgRbtNode());
         nodes.push_back(node);
-        initNode(nodes.size()-1);
+        initNode(nodes.size()-1, shape);
         return node;
     }
 
@@ -353,13 +348,11 @@ public:
         parent.reset(new SgRbtNode());
         parent->addChild(shared_ptr<MyShapeNode>(
             new MyShapeNode(g_cube, g_blueDiffuseMat)
-            ));
+        ));
 
         // iterate over nodes:
         for (int i = 0; i < selected.size(); i++) {
             shared_ptr<SgRbtNode> selectedChild = selected.at(i);
-            cout << selectedChild << endl;
-
             // remove selected from SG
             g_world->removeChild(selectedChild);
             // recontextualize position, rotation
@@ -369,6 +362,13 @@ public:
         }
         // add new parent to SG
         g_world->addChild(parent);
+
+        // remove selected from nodes
+        for (int i = 0; i < selected.size(); i++) {
+            nodes.erase(find(nodes.begin(), nodes.end(), selected[i]));
+        }
+        // add parent to nodes
+        nodes.push_back(parent);
     }
 
 };
