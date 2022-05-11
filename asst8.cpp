@@ -124,6 +124,7 @@ typedef SgGeometryShapeNode MyShapeNode;
 
 // Vertex buffer and index buffer associated with the ground and cube geometry
 static shared_ptr<Geometry> g_ground, g_cube, g_sphere;
+static shared_ptr<SimpleIndexedGeometryPN> g_cubePN, g_spherePN;
 
 // --------- Scene
 static shared_ptr<SgRootNode> g_world;
@@ -294,7 +295,7 @@ static int g_curKeyFrameNum;
 //-------- Final Project
 class Builder {
 public:
-    vector<shared_ptr<Geometry>> shapes;
+    vector<shared_ptr<SimpleIndexedGeometryPN>> shapes;
     vector<shared_ptr<SgRbtNode>> nodes;
     enum ShapeGeo {
         CUBE,
@@ -306,9 +307,9 @@ public:
     */
     void initGeo(int i, ShapeGeo shape) {
         if (shape == SPHERE) {
-            shapes.at(i) = g_sphere;
+            shapes.at(i) = g_spherePN;
         } else {
-            shapes.at(i) = g_cube;
+            shapes.at(i) = g_cubePN;
         }
     }
 
@@ -329,7 +330,7 @@ public:
     * Spawn a new shape at (0,0,0)
     */
     void addShape(ShapeGeo shape=CUBE) {
-        shared_ptr<Geometry> geo;
+        shared_ptr<SimpleIndexedGeometryPN> geo;
         shapes.push_back(geo);
         initGeo(shapes.size()-1, shape);
 
@@ -341,6 +342,10 @@ public:
     void addCube() { addShape(CUBE); }
     
     void addSphere() { addShape(SPHERE); }
+
+    void combineObjects() {
+
+    }
 
 };
 
@@ -515,6 +520,15 @@ static void initCubes() {
     makeCube(1, vtx.begin(), idx.begin());
     g_cube.reset(
         new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vbLen, ibLen));
+
+
+    vector<VertexPN> vtxPN(vbLen);
+    for (int i = 0; i < vtx.size(); i++) {
+        vtxPN[i] = *(new VertexPN(vtx[i].p, vtx[i].n));
+    }
+
+    g_cubePN.reset(
+        new SimpleIndexedGeometryPN(&vtxPN[0], &idx[0], vbLen, ibLen));
 }
 
 static void initSphere() {
@@ -527,6 +541,14 @@ static void initSphere() {
     makeSphere(1, 20, 10, vtx.begin(), idx.begin());
     g_sphere.reset(new SimpleIndexedGeometryPNTBX(&vtx[0], &idx[0], vtx.size(),
                                                   idx.size()));
+
+    vector<VertexPN> vtxPN(vbLen);
+    for (int i = 0; i < vtx.size(); i++) {
+        vtxPN[i] = *(new VertexPN(vtx[i].p, vtx[i].n));
+    }
+
+    g_spherePN.reset(new SimpleIndexedGeometryPN(&vtxPN[0], &idx[0], vtx.size(),
+        idx.size()));
 }
 
 static void initRobots() {

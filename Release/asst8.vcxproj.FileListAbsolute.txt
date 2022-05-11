@@ -1,1 +1,2 @@
 C:\Users\chris\Documents\GitHub\cg\cs175-assignment-9-beluga\Release\asst7.exe
+C:\Users\chris\Documents\GitHub\CS175-fp\Release\asst7.exe
