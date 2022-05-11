@@ -343,9 +343,18 @@ public:
         // get selected nodes
         vector<shared_ptr<SgRbtNode>> selected = nodes;
 
+        // Calc parent position (average of selected)
+        Cvec3 parentPos;
+        for (int i = 0; i < selected.size(); i++) {
+            RigTForm selectedRbt = selected.at(i)->getRbt();
+            parentPos += selectedRbt.getTranslation() / ((double)selected.size());
+        }
+
+        RigTForm parentRbt(parentPos);
+
         // create new parent
         shared_ptr<SgRbtNode> parent;
-        parent.reset(new SgRbtNode());
+        parent.reset(new SgRbtNode(parentRbt));
         parent->addChild(shared_ptr<MyShapeNode>(
             new MyShapeNode(g_cube, g_blueDiffuseMat)
         ));
