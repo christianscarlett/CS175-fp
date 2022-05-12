@@ -819,7 +819,7 @@ static void drawStuff(bool picking) {
         glFlush();
         shared_ptr<SgRbtNode> pickedRbtNode = picker.getRbtNodeAtXY(g_mouseClickX * g_wScale, g_mouseClickY * g_hScale);
 
-        if ((g_parentPickingMode || g_selecting) && pickedRbtNode != g_groundNode) {
+        if ((g_parentPickingMode || g_selecting) && pickedRbtNode != g_groundNode && pickedRbtNode != 0) {
             // find parent of picked node
             ParentPicker parentPicker(pickedRbtNode);
             g_world->accept(parentPicker);
