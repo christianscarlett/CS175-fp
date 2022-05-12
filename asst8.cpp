@@ -391,15 +391,15 @@ public:
         if (find(selected.begin(), selected.end(), node) == selected.end()) {
             selected.push_back(node);
         }
-        cout << selected.size() << endl;
     }
 
     /*
     * Group the selected objects into one object
     */
     void group() {
-        if (selected.size() == 1) {
+        if (selected.size() <= 1) {
             // cannot group a single object/subgroup
+            cout << "Not enough objects have been selected to group." << endl;
             return;
         }
 
