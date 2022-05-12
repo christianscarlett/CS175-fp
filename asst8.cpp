@@ -383,12 +383,15 @@ public:
     shared_ptr<SgRbtNode> addSphere() { return addObject(SPHERE); }
 
     /*
-    * Add an object to the current selected objects
+    * Add an object to the current selected objects if not already in selected
     */
     void addToSelected(shared_ptr<SgRbtNode> node) {
         // Selected nodes must be within the builder context
         assert(find(nodes.begin(), nodes.end(), node) != nodes.end());
-        selected.push_back(node);
+        if (find(selected.begin(), selected.end(), node) == selected.end()) {
+            selected.push_back(node);
+        }
+        cout << selected.size() << endl;
     }
 
     /*
@@ -816,7 +819,7 @@ static void drawStuff(bool picking) {
         glFlush();
         shared_ptr<SgRbtNode> pickedRbtNode = picker.getRbtNodeAtXY(g_mouseClickX * g_wScale, g_mouseClickY * g_hScale);
 
-        if (g_parentPickingMode || g_selecting) {
+        if ((g_parentPickingMode || g_selecting) && pickedRbtNode != g_groundNode) {
             // find parent of picked node
             ParentPicker parentPicker(pickedRbtNode);
             g_world->accept(parentPicker);
@@ -824,20 +827,20 @@ static void drawStuff(bool picking) {
             if (g_selecting) {
                 // add parent to selected in builder
                 g_builder.addToSelected(selectedParent);
-            } else {
+            }
+            else {
                 // set parent as picked
                 g_currentPickedRbtNode = selectedParent;
             }
         }
         else {
             g_currentPickedRbtNode = pickedRbtNode;
+            if (g_currentPickedRbtNode == g_groundNode)
+                g_currentPickedRbtNode = shared_ptr<SgRbtNode>(); // set to NULL
+
+            cout << (g_currentPickedRbtNode ? "Part picked" : "No part picked")
+                << endl;
         }
-
-        if (g_currentPickedRbtNode == g_groundNode)
-            g_currentPickedRbtNode = shared_ptr<SgRbtNode>(); // set to NULL
-
-        cout << (g_currentPickedRbtNode ? "Part picked" : "No part picked")
-             << endl;
     } else {
         Drawer drawer(invEyeRbt, uniforms);
         g_world->accept(drawer);
@@ -1552,12 +1555,12 @@ static void initScene() {
         new MyShapeNode(g_ground, g_bumpFloorMat, Cvec3(0, g_groundY, 0))));
 
     g_light1Node.reset(new SgRbtNode(RigTForm(Cvec3(2.0, 3.0, 14.0))));
-    g_light1Node->addChild(shared_ptr<MyShapeNode>(
-        new MyShapeNode(g_sphere, g_lightMat)));
+    //g_light1Node->addChild(shared_ptr<MyShapeNode>(
+    //    new MyShapeNode(g_sphere, g_lightMat)));
 
     g_light2Node.reset(new SgRbtNode(RigTForm(Cvec3(2, 3.0, 5.0))));
-    g_light2Node->addChild(shared_ptr<MyShapeNode>(
-        new MyShapeNode(g_sphere, g_lightMat)));
+    //g_light2Node->addChild(shared_ptr<MyShapeNode>(
+    //    new MyShapeNode(g_sphere, g_lightMat)));
 
     g_robot1Node.reset(new SgRbtNode(RigTForm(Cvec3(-2, 1, 0))));
     g_robot2Node.reset(new SgRbtNode(RigTForm(Cvec3(2, 1, 0))));
@@ -1570,8 +1573,8 @@ static void initScene() {
     g_bunnyNode.reset(new SgRbtNode(RigTForm(Cvec3(5,1,-10))));
 
     // add bunny as a shape nodes
-    g_bunnyNode->addChild(
-        shared_ptr<MyShapeNode>(new MyShapeNode(g_bunnyGeometry, g_bunnyMat)));
+    //g_bunnyNode->addChild(
+    //    shared_ptr<MyShapeNode>(new MyShapeNode(g_bunnyGeometry, g_bunnyMat)));
 
     // add each shell as shape node
     for (int i = 0; i < g_numShells; ++i) {
