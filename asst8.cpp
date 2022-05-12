@@ -377,7 +377,12 @@ public:
     * Group the selected objects into one object
     */
     void group() {
-        // Calc parent position (average of selected)
+        if (selected.size() == 1) {
+            // cannot group a single object/subgroup
+            return;
+        }
+
+        // calc parent position (average of selected)
         Cvec3 parentPos;
         for (int i = 0; i < selected.size(); i++) {
             RigTForm selectedRbt = selected.at(i)->getRbt();
@@ -421,23 +426,49 @@ public:
     * Take each selected group and divide it into its seperate parts
     */
     void ungroup() {
+        // for each selected group, ungroup it
         for (int i = 0; i < selected.size(); i++) {
             shared_ptr<SgRbtNode> parent = selected.at(i);
             ungroupOne(parent);
         }
+        // reset picked node
+        g_currentPickedRbtNode = shared_ptr<SgRbtNode>();
+        // clear selected
+        selected.clear();
     }
 
     /*
-    * Take one group and divit it into its seperate parts
+    * Take one group and divide it into its seperate parts
     */
     void ungroupOne(shared_ptr<SgRbtNode> parent) {
+        // get direct children of parent
         ChildPicker childPicker(parent);
         parent->accept(childPicker);
         vector<shared_ptr<SgRbtNode>> children = childPicker.getChildren();
-        for (int i = 0; i < children.size(); i++) {
-            shared_ptr<SgRbtNode> child = children.at(i);
-            cout << child << endl;
+        if (children.size() == 0) {
+            // cannot ungroup object
+            return;
         }
+
+        const RigTForm parentRbt = parent->getRbt();
+        
+        for (int i = 0; i < children.size(); i++) {
+            // remove child from parent
+            shared_ptr<SgRbtNode> child = children.at(i);
+            parent->removeChild(child);
+            // recontextualize child in world environment
+            const RigTForm childRbt = child->getRbt();
+            const RigTForm newChildRbt = parentRbt * childRbt;
+            child->setRbt(newChildRbt);
+            // add them back to the world environment
+            g_world->addChild(child);
+            // add child to nodes
+            nodes.push_back(child);
+        }
+        // remove parent from world
+        g_world->removeChild(parent);
+        // remove parent from nodes
+        nodes.erase(find(nodes.begin(), nodes.end(), parent));
     }
 
 };
