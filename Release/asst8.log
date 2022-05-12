@@ -251,23 +251,28 @@ C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,57): warning C4244: 'arg
           [
               T=float
           ]
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(49,38): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(430,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(526,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(546,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(572,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(682,49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(681,49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(717,75): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(717,60): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(717,45): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(717,30): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(733,35): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1190,59): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1289,30): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1291,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(52,38): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(408,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(419,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(434,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(451,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(476,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(575,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(671,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(691,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(717,63): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(820,109): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(820,83): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(879,75): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(879,60): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(879,45): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(879,30): warning C4244: 'argument': conversion from 'GLdouble' to 'GLclampf', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(895,35): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1373,59): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1472,30): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(1474,33): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(35,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(507): message : see reference to function template instantiation 'void makePlane<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,VtxOutIter,IdxOutIter)' being compiled
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(652): message : see reference to function template instantiation 'void makePlane<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,VtxOutIter,IdxOutIter)' being compiled
           with
           [
               _Ty=VertexPNTBX,
@@ -275,7 +280,7 @@ C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(507): message : see reference
               IdxOutIter=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>
           ]
 C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(55,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(520): message : see reference to function template instantiation 'void makeCube<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,VtxOutIter,IdxOutIter)' being compiled
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(665): message : see reference to function template instantiation 'void makeCube<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,VtxOutIter,IdxOutIter)' being compiled
           with
           [
               _Ty=VertexPNTBX,
@@ -287,7 +292,7 @@ C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(145,21): warning C4244:
           [
               _Ty=double
           ]
-C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(541): message : see reference to function template instantiation 'void makeSphere<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,int,int,VtxOutIter,IdxOutIter)' being compiled
+C:\Users\chris\Documents\GitHub\CS175-fp\asst8.cpp(686): message : see reference to function template instantiation 'void makeSphere<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned short>>>>(float,int,int,VtxOutIter,IdxOutIter)' being compiled
           with
           [
               _Ty=VertexPNTBX,
@@ -324,7 +329,7 @@ C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(150,22): warning C4244:
           ]
 C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(154,72): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\chris\Documents\GitHub\CS175-fp\geometrymaker.h(154,54): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  geometry.cpp
+  childpicker.cpp
 C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
           with
           [
@@ -577,9 +582,7 @@ C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,57): warning C4244: 'arg
           [
               T=float
           ]
-  glsupport.cpp
-C:\Users\chris\Documents\GitHub\CS175-fp\glsupport.cpp(33,16): warning C4244: 'initializing': conversion from 'std::streamoff' to 'size_t', possible loss of data
-  material.cpp
+  parentpicker.cpp
 C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
           with
           [
@@ -1085,519 +1088,11 @@ C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,57): warning C4244: 'arg
           [
               T=float
           ]
-  ppm.cpp
-  renderstates.cpp
-  scenegraph.cpp
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,97): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,97): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,41): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,29): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,17): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,70): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,57): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-  texture.cpp
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(315,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,97): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(350,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,30): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,22): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,14): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,66): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,55): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,44): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,97): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(391,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,41): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,29): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,17): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,83): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,70): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
-C:\Users\chris\Documents\GitHub\CS175-fp\geometry.h(392,57): warning C4244: 'argument': conversion from 'const T' to 'const T', possible loss of data
-          with
-          [
-              T=double
-          ]
-          and
-          [
-              T=float
-          ]
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  3249 of 3286 functions (98.9%) were compiled, the rest were copied from previous compilation.
-    164 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  302 of 3316 functions ( 9.1%) were compiled, the rest were copied from previous compilation.
+    60 functions were new in current compilation
+    156 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 LINK : warning LNK4286: symbol '___glewUniform3fv' defined in 'glew32s.lib(glew.obj)' is imported by 'picker.obj'
 LINK : warning LNK4286: symbol '___glewUniformMatrix4fv' defined in 'glew32s.lib(glew.obj)' is imported by 'picker.obj'
