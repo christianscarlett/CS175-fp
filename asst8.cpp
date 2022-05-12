@@ -320,7 +320,7 @@ public:
     }
 
     /*
-    * Add object i to the scene graph
+    * Add object i to the scene graph with shape shape
     */
     void initNode(int i, ShapeGeo shape) {
         shared_ptr<SgRbtNode> node = nodes.at(i);
@@ -341,9 +341,9 @@ public:
     }
 
     /*
-    * Spawn a new shape at (0,0,0)
+    * Spawn a new object at (0,0,0)
     */
-    shared_ptr<SgRbtNode> addShape(ShapeGeo shape=CUBE) {
+    shared_ptr<SgRbtNode> addObject(ShapeGeo shape=CUBE) {
         shared_ptr<SgRbtNode> node;
         node.reset(new SgRbtNode());
         nodes.push_back(node);
@@ -351,20 +351,23 @@ public:
         return node;
     }
 
-    shared_ptr<SgRbtNode> addCube() { return addShape(CUBE); }
+    shared_ptr<SgRbtNode> addCube() { return addObject(CUBE); }
     
-    shared_ptr<SgRbtNode> addSphere() { return addShape(SPHERE); }
+    shared_ptr<SgRbtNode> addSphere() { return addObject(SPHERE); }
 
+    /*
+    * Add an object to the current selected objects
+    */
     void addToSelected(shared_ptr<SgRbtNode> node) {
         // Selected nodes must be within the builder context
         assert(find(nodes.begin(), nodes.end(), node) != nodes.end());
         selected.push_back(node);
     }
 
+    /*
+    * Group the selected objects into one object
+    */
     void group() {
-        // get selected nodes
-        //vector<shared_ptr<SgRbtNode>> selected = nodes;
-
         // Calc parent position (average of selected)
         Cvec3 parentPos;
         for (int i = 0; i < selected.size(); i++) {
@@ -383,8 +386,8 @@ public:
             // remove selected from SG
             g_world->removeChild(child);
             // recontextualize position, rotation
-            RigTForm childRbt = child->getRbt();
-            RigTForm newChildRbt = inv(parentRbt) * childRbt;
+            const RigTForm childRbt = child->getRbt();
+            const RigTForm newChildRbt = inv(parentRbt) * childRbt;
             child->setRbt(newChildRbt);
             // add selected to new parent
             parent->addChild(child);
@@ -394,7 +397,7 @@ public:
 
         // remove selected from nodes
         for (int i = 0; i < selected.size(); i++) {
-            nodes.erase(find(nodes.begin(), nodes.end(), selected[i]));
+            nodes.erase(find(nodes.begin(), nodes.end(), selected.at(i)));
         }
         // add parent to nodes
         nodes.push_back(parent);
