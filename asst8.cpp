@@ -315,17 +315,38 @@ public:
     enum ShapeGeo {
         CUBE,
         SPHERE,
+        RECTANGLE,
+        OVAL,
     };
 
     /*
-    * Get geometry for a shape
+    * Get shape for an object
     */
-    shared_ptr<SimpleIndexedGeometryPN> getGeo(ShapeGeo shape) {
+    shared_ptr<MyShapeNode> getShape(ShapeGeo shape, shared_ptr<Material> material) {
+        shared_ptr<SimpleIndexedGeometryPN> geo;
+        Cvec3 translate(0,0,0);
+        Cvec3 scale(1, 1, 1);
         if (shape == SPHERE) {
-            return g_spherePN;
-        } else {
-            return g_cubePN;
+            geo = g_spherePN;
+        } else if (shape == OVAL) {
+            geo = g_spherePN;
+            scale = Cvec3(2, 1, 1);
+        } else if (shape == CUBE) {
+            geo = g_cubePN;
+        } else if (shape == RECTANGLE) {
+            geo = g_cubePN;
+            scale = Cvec3(2, 1, 1);
         }
+
+        return shared_ptr<MyShapeNode>(
+            new MyShapeNode(
+                geo, 
+                material,
+                translate, // translation
+                Cvec3(0,0,0), // euler
+                scale  // scale
+            )
+        );
     }
 
     /*
@@ -342,10 +363,7 @@ public:
             (float)rand() / RAND_MAX, (float)rand() / RAND_MAX, (float)rand() / RAND_MAX)
         );
 
-        node->addChild(shared_ptr<MyShapeNode>(
-            new MyShapeNode(getGeo(shape), material)
-        ));
-
+        node->addChild(getShape(shape, material));
         g_world->addChild(node);
     }
 
@@ -1240,20 +1258,6 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             g_msBetweenKeyFrames = max(g_msBetweenKeyFrames - 100, 100);
             cerr << g_msBetweenKeyFrames << " ms between keyframes.\n";
             break;
-        case GLFW_KEY_Y:
-            if (!g_playingAnimation) {
-                if (g_animator.getNumKeyFrames() < 4) {
-                    cerr << " Cannot play animation with less than 4 keyframes."
-                         << endl;
-                } else {
-                    g_playingAnimation = true;
-                    cerr << "Playing animation... " << endl;
-                }
-            } else {
-                cerr << "Stopping animation... " << endl;
-                g_playingAnimation = false;
-            }
-            break;
         case GLFW_KEY_RIGHT:
             g_furHeight *= 1.05;
             cerr << "fur height = " << g_furHeight << std::endl;
@@ -1275,6 +1279,12 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             break;
         case GLFW_KEY_R:
             g_builder.addSphere();
+            break;
+        case GLFW_KEY_T:
+            g_builder.addObject(Builder::ShapeGeo::RECTANGLE);
+            break;
+        case GLFW_KEY_Y:
+            g_builder.addObject(Builder::ShapeGeo::OVAL);
             break;
         case GLFW_KEY_G:
             if (g_selecting) {
