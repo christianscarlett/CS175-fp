@@ -17,6 +17,7 @@ bool ParentPicker::visit(SgTransformNode& node) {
         shared_ptr<SgRbtNode> asRbtNode =
             dynamic_pointer_cast<SgRbtNode>(nodeStack_.at(1));
         parent_ = asRbtNode;
+        return false;
     }
     return true;
 }

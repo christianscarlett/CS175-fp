@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="arcball.h" />
     <ClInclude Include="asstcommon.h" />
+    <ClInclude Include="childpicker.h" />
     <ClInclude Include="cvec.h" />
     <ClInclude Include="drawer.h" />
     <ClInclude Include="geometry.h" />
@@ -34,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asst8.cpp" />
+    <ClCompile Include="childpicker.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="glsupport.cpp" />
     <ClCompile Include="material.cpp" />

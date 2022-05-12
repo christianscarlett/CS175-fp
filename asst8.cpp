@@ -39,6 +39,7 @@
 #include "mesh.h"
 
 #include "parentpicker.h"
+#include "childpicker.h"
 
 using namespace std;
 
@@ -298,8 +299,16 @@ static int g_curKeyFrameNum;
 static bool g_parentPickingMode = true;
 static bool g_selecting = false;
 
+/*
+* Class to introduce objects to the build environment, group them together, and ungroup them.
+* 
+*/
 class Builder {
 public:
+    // Invariant: groups introduced by the builder may only have groups or objects as children
+    // Invariant: objects may only have their bone as a child
+    // Invariant: `nodes` must only contain pointers to objects/groups that are direct children of the world
+    // Invariant: `selected` must only contain objects that exist in `nodes`
     vector<shared_ptr<SgRbtNode>> nodes;
     vector<shared_ptr<SgRbtNode>> selected;
 
@@ -405,6 +414,30 @@ public:
         g_currentPickedRbtNode = parent;
         // clear selected
         selected.clear();
+    }
+
+    /*
+    * The inverse of group()
+    * Take each selected group and divide it into its seperate parts
+    */
+    void ungroup() {
+        for (int i = 0; i < selected.size(); i++) {
+            shared_ptr<SgRbtNode> parent = selected.at(i);
+            ungroupOne(parent);
+        }
+    }
+
+    /*
+    * Take one group and divit it into its seperate parts
+    */
+    void ungroupOne(shared_ptr<SgRbtNode> parent) {
+        ChildPicker childPicker(parent);
+        parent->accept(childPicker);
+        vector<shared_ptr<SgRbtNode>> children = childPicker.getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            shared_ptr<SgRbtNode> child = children.at(i);
+            cout << child << endl;
+        }
     }
 
 };
@@ -1216,6 +1249,14 @@ static void keyboard(GLFWwindow* window, int key, int scancode, int action, int 
             if (g_selecting) {
                 cout << "Grouping" << endl;
                 g_builder.group();
+                g_selecting = false;
+                cout << "Selecting: off" << endl;
+            }
+            break;
+        case GLFW_KEY_F:
+            if (g_selecting) {
+                cout << "Ungrouping" << endl;
+                g_builder.ungroup();
                 g_selecting = false;
                 cout << "Selecting: off" << endl;
             }
